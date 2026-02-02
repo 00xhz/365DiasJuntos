@@ -171,6 +171,7 @@
     <h3 style="text-align: left; margin-bottom: 0;">📅 02 Febrero 2026</h3>
     <h4 style="text-align: left; margin-top: 0;">💌 Mi Hermosha Camila</h4>
     <div id="mainLetter" style="text-align: justify; min-height: 180px; font-size: 1.08em;"></div>
+    <div id="heartsContainer" style="position: relative; width: 100%; min-height: 80px; margin-top: 18px;"></div>
     <div style="display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; width: 100%; margin-top: 24px;">
       <div style="flex: 0 0 auto;">
         <button id="surpriseBtn" style="background: #ffeb3b; color: #222; border: none; border-radius: 50%; width: 54px; height: 54px; font-size: 2rem; font-weight: bold; box-shadow: 0 2px 8px #fbb6ce; cursor: pointer; transition: background 0.2s;">?</button>
@@ -192,9 +193,12 @@
 </div>
 <script>
 
-// Efecto máquina de escribir para la carta principal
+
+
+// Efecto máquina de escribir para la carta principal (más lento y corazones grandes debajo)
 const mainLetterText = `Han pasado ya 365 días desde que esta hermosa historia juntos comenzó, 12 largos meses en los que han ocurrido de todo, desde felicidad, tristeza, ciertas peleas pequeñas, pero apesar de que han habido momentos dificiles, todo lo hemos sabido sobrellevar.\nCada momento junto a ti, por más que sean 2 minutos hablando, me hace sentir la persona mas feliz del mundo, y es que no hay nada mas bonito que escucharte reir, escuchar tu voz, sentir tu cariño sincero, cada dia a tu lado es un regalo que aprecio con todo mi corazon.\n\nContigo he aprendido muchas cosas, a ser mejor persona, a valorar cada instante, a amar sin condiciones, a ser paciente y comprensivo. Eres mi compañera de vida, mi persona de confianza, mi mejor amiga, mi preciosa novia que no cambiaré por nadie en la vida. Gracias por ser como eres, por tu ternura, tu dulzura, tu inteligencia y tu belleza que me deja plenamente enamorado por cada segundo que veo tu carita bella, no sabes lo mucho que me encanta ver tu delicada piel, tus ojitos perfectos, tu cabello, y cada detalle de ti que me hace amarte mas y mas.\n\nContigo mi vida es diferente, más llena de amor, alegría y felicidad. Gracias por hacerme sentir tan especial cada día, me encantas por todo lo que haces por mi.\n\nTe amo mxoo. ♡`;
 const mainLetterDiv = document.getElementById('mainLetter');
+const heartsContainer = document.getElementById('heartsContainer');
 let mainLetterIdx = 0;
 function typeMainLetter() {
   if (mainLetterIdx < mainLetterText.length) {
@@ -205,8 +209,32 @@ function typeMainLetter() {
       mainLetterDiv.innerHTML += char;
     }
     mainLetterIdx++;
-    setTimeout(typeMainLetter, 28);
+    setTimeout(typeMainLetter, 48); // Más lento
+  } else {
+    // Cuando termina, mostrar corazones grandes debajo
+    setTimeout(() => fillHeartsBelow(), 600);
   }
+}
+function fillHeartsBelow() {
+  const heartCount = 18;
+  let i = 0;
+  function addHeart() {
+    if (i < heartCount) {
+      const heart = document.createElement('img');
+      heart.src = 'https://img.emojitty.art/emojitty/assets/2025/09/cat-with-heart_hd.png';
+      heart.alt = 'corazón';
+      heart.style.position = 'absolute';
+      heart.style.width = (Math.random() * 40 + 50) + 'px';
+      heart.style.left = (Math.random() * 80) + '%';
+      heart.style.top = (Math.random() * 30) + 'px';
+      heart.style.transform = `rotate(${Math.random()*60-30}deg)`;
+      heart.style.opacity = 0.92;
+      heartsContainer.appendChild(heart);
+      i++;
+      setTimeout(addHeart, 120);
+    }
+  }
+  addHeart();
 }
 if (mainLetterDiv) typeMainLetter();
 
