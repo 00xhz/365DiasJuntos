@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>miamorsito camila</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(194, 197, 197); 
+      overflow-x: hidden;
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .heart {
+      position: absolute;
+      animation: fall linear forwards;
+      color: rgba(255,0,0,0.6);
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+    .screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+    .active {
+      display: flex;
+    }
+    .password-screen {
+      flex-direction: column;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .key {
+      background-color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
+    }
+    .key:hover {
+      background-color: #e6f0f5;
+      transform: translateY(-3px);
+    }
+    .input-display {
+      font-size: 24px;
+      margin-top: 20px;
+      letter-spacing: 8px;
+    }
+    .notepad {
+      background-color: #f9f9f9;
+      border: 3px solid #000000;
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      text-align: left;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      line-height: 1.6;
+      box-shadow: 8px 8px 15px rgba(0,0,0,0.2);
+    }
+    .notepad h3 {
+      margin-top: 0;
+    }
+    .password-img {
+      width: 260px; 
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 6px 6px 15px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .note-img {
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background-color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background-color: #ded8d8;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+<div class="hearts"></div>
+<div id="passwordScreen" class="screen password-screen active">
+<img src="https://cdn.discordapp.com/attachments/1143634407723376732/1467749243363131681/IMG_9592.png?ex=69818381&is=69803201&hm=fc0a1675d0cfb388e141f8dbc757b1cf75ff934fc4b3c997fa6f78ea0a996059&" 
+     alt="Imagen decorativa" 
+     class="password-img" 
+     style="width: 300px; height: auto;">
+  <h2>🔒 Ingresa la contraseña</h2>
+  <div class="input-display" id="inputDisplay">••••</div>
+  <div class="keypad">
+    <button class="key" onclick="enterDigit('1')">1</button>
+    <button class="key" onclick="enterDigit('2')">2</button>
+    <button class="key" onclick="enterDigit('3')">3</button>
+    <button class="key" onclick="enterDigit('4')">4</button>
+    <button class="key" onclick="enterDigit('5')">5</button>
+    <button class="key" onclick="enterDigit('6')">6</button>
+    <button class="key" onclick="enterDigit('7')">7</button>
+    <button class="key" onclick="enterDigit('8')">8</button>
+    <button class="key" onclick="enterDigit('9')">9</button>
+    <button class="key" onclick="checkPassword()">✔</button>
+    <button class="key" onclick="enterDigit('0')">0</button>
+    <button class="key" onclick="deleteLast()">⌫</button>
+  </div>
+</div>
+<div id="notepadScreen" class="screen">
+  <div class="notepad" style="text-align: center;">
+    <img src="https://cdn.custom-cursor.com/packs/10587/pusheen-valentines-day-pack.png" 
+         alt="Imagen decorativa" 
+         class="password-img"
+         style="max-width: 100%; height: auto;">
+<h3 style="text-align: left; margin-bottom: 0;">📅 02 Febrero 2026</h3>
+<h4 style="text-align: left; margin-top: 0;">💌 Mi Hermosha Camila</h4>
+<p style="text-align: justify;">
+  Han pasado ya 365 días desde que esta hermosa historia juntos comenzó, 12 largos meses en los que han ocurrido de todo, desde felicidad, tristeza, ciertas peleas pequeñas, pero apesar de que han habido momentos dificiles, todo lo hemos sabido sobrellevar.
+  Cada momento junto a ti, por más que sean 2 minutos hablando, me hace sentir la persona mas feliz del mundo, y es que no hay nada mas bonito que escucharte reir, escuchar tu voz, sentir tu cariño sincero, cada dia a tu lado es un regalo que aprecio con todo mi corazon.
+</p>
+<p style="text-align: justify;">
+  Contigo he aprendido muchas cosas, a ser mejor persona, a valorar cada instante, a amar sin condiciones, a ser paciente y comprensivo. Eres mi compañera de vida, mi persona de confianza, mi mejor amiga, mi preciosa novia que no cambiaré por nadie en la vida.
+  Gracias por ser como eres, por tu ternura, tu dulzura, tu inteligencia y tu belleza que me deja plenamente enamorado por cada segundo que veo tu carita bella, no sabes lo mucho que me encanta ver tu delicada piel, tus ojitos perfectos, tu cabello, y cada detalle de ti que me hace amarte mas y mas.
+</p>
+<p style="text-align: justify;">
+  Contigo mi vida es diferente, más llena de amor, alegría y felicidad. Gracias por hacerme sentir tan especial cada día, me encantas por todo lo que haces por mi.
+</p>
+<p style="text-align: justify;">
+  Te amo profundamente. ♡
+</p>
+    <button class="back-btn" onclick="goBack()">🔙 Inicio</button>
+  </div>
+</div>
+<script>
+  function crearCorazones() {
+    const heartsContainer = document.querySelector('.hearts');
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 8000);
+    }, 500);
+  }
+  crearCorazones();
+  const correctPassword = '0202';
+  let input = '';
+  function enterDigit(digit) {
+    if (input.length < 4) {
+      input += digit;
+      updateDisplay();
+    }
+  }
+  function deleteLast() {
+    input = input.slice(0, -1);
+    updateDisplay();
+  }
+  function updateDisplay() {
+    document.getElementById('inputDisplay').textContent = input.padEnd(4, '•');
+  }
+  function checkPassword() {
+    if (input.length === 4) {
+      if (input === correctPassword) {
+        document.getElementById('passwordScreen').classList.remove('active');
+        document.getElementById('notepadScreen').classList.add('active');
+      } else {
+        alert('Contraseña incorrecta, intenta de nuevo');
+        input = '';
+        updateDisplay();
+      }
+    } else {
+      alert('Debes ingresar los 4 dígitos.');
+    }
+  }
+  function goBack() {
+    document.getElementById('notepadScreen').classList.remove('active');
+    document.getElementById('passwordScreen').classList.add('active');
+    input = '';
+    updateDisplay();
+  }
+</script>
+</body>
+</html>
