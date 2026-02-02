@@ -168,22 +168,9 @@
          alt="Imagen decorativa" 
          class="password-img"
          style="max-width: 100%; height: auto;">
-<h3 style="text-align: left; margin-bottom: 0;">📅 02 Febrero 2026</h3>
-<h4 style="text-align: left; margin-top: 0;">💌 Mi Hermosha Camila</h4>
-<p style="text-align: justify;">
-  Han pasado ya 365 días desde que esta hermosa historia juntos comenzó, 12 largos meses en los que han ocurrido de todo, desde felicidad, tristeza, ciertas peleas pequeñas, pero apesar de que han habido momentos dificiles, todo lo hemos sabido sobrellevar.
-  Cada momento junto a ti, por más que sean 2 minutos hablando, me hace sentir la persona mas feliz del mundo, y es que no hay nada mas bonito que escucharte reir, escuchar tu voz, sentir tu cariño sincero, cada dia a tu lado es un regalo que aprecio con todo mi corazon.
-</p>
-<p style="text-align: justify;">
-  Contigo he aprendido muchas cosas, a ser mejor persona, a valorar cada instante, a amar sin condiciones, a ser paciente y comprensivo. Eres mi compañera de vida, mi persona de confianza, mi mejor amiga, mi preciosa novia que no cambiaré por nadie en la vida.
-  Gracias por ser como eres, por tu ternura, tu dulzura, tu inteligencia y tu belleza que me deja plenamente enamorado por cada segundo que veo tu carita bella, no sabes lo mucho que me encanta ver tu delicada piel, tus ojitos perfectos, tu cabello, y cada detalle de ti que me hace amarte mas y mas.
-</p>
-<p style="text-align: justify;">
-  Contigo mi vida es diferente, más llena de amor, alegría y felicidad. Gracias por hacerme sentir tan especial cada día, me encantas por todo lo que haces por mi.
-</p>
-<p style="text-align: justify;">
-  Te amo profundamente. ♡
-</p>
+    <h3 style="text-align: left; margin-bottom: 0;">📅 02 Febrero 2026</h3>
+    <h4 style="text-align: left; margin-top: 0;">💌 Mi Hermosha Camila</h4>
+    <div id="mainLetter" style="text-align: justify; min-height: 180px; font-size: 1.08em;"></div>
     <div style="display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; width: 100%; margin-top: 24px;">
       <div style="flex: 0 0 auto;">
         <button id="surpriseBtn" style="background: #ffeb3b; color: #222; border: none; border-radius: 50%; width: 54px; height: 54px; font-size: 2rem; font-weight: bold; box-shadow: 0 2px 8px #fbb6ce; cursor: pointer; transition: background 0.2s;">?</button>
@@ -204,6 +191,24 @@
   </div>
 </div>
 <script>
+
+// Efecto máquina de escribir para la carta principal
+const mainLetterText = `Han pasado ya 365 días desde que esta hermosa historia juntos comenzó, 12 largos meses en los que han ocurrido de todo, desde felicidad, tristeza, ciertas peleas pequeñas, pero apesar de que han habido momentos dificiles, todo lo hemos sabido sobrellevar.\nCada momento junto a ti, por más que sean 2 minutos hablando, me hace sentir la persona mas feliz del mundo, y es que no hay nada mas bonito que escucharte reir, escuchar tu voz, sentir tu cariño sincero, cada dia a tu lado es un regalo que aprecio con todo mi corazon.\n\nContigo he aprendido muchas cosas, a ser mejor persona, a valorar cada instante, a amar sin condiciones, a ser paciente y comprensivo. Eres mi compañera de vida, mi persona de confianza, mi mejor amiga, mi preciosa novia que no cambiaré por nadie en la vida. Gracias por ser como eres, por tu ternura, tu dulzura, tu inteligencia y tu belleza que me deja plenamente enamorado por cada segundo que veo tu carita bella, no sabes lo mucho que me encanta ver tu delicada piel, tus ojitos perfectos, tu cabello, y cada detalle de ti que me hace amarte mas y mas.\n\nContigo mi vida es diferente, más llena de amor, alegría y felicidad. Gracias por hacerme sentir tan especial cada día, me encantas por todo lo que haces por mi.\n\nTe amo mxoo. ♡`;
+const mainLetterDiv = document.getElementById('mainLetter');
+let mainLetterIdx = 0;
+function typeMainLetter() {
+  if (mainLetterIdx < mainLetterText.length) {
+    const char = mainLetterText.charAt(mainLetterIdx);
+    if (char === '\n') {
+      mainLetterDiv.innerHTML += '<br>';
+    } else {
+      mainLetterDiv.innerHTML += char;
+    }
+    mainLetterIdx++;
+    setTimeout(typeMainLetter, 28);
+  }
+}
+if (mainLetterDiv) typeMainLetter();
 
 // Sorpresa con cuenta regresiva
 const surpriseBtn = document.getElementById('surpriseBtn');
